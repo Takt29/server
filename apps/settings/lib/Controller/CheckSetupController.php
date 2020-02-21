@@ -258,29 +258,6 @@ class CheckSetupController extends Controller {
 	}
 
 	/**
-	 * Whether the version is outdated
-	 *
-	 * @return bool
-	 */
-	protected function isPhpOutdated() {
-		if (version_compare(PHP_VERSION, '7.1.0', '<')) {
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
-	 * Whether the php version is still supported (at time of release)
-	 * according to: https://secure.php.net/supported-versions.php
-	 *
-	 * @return array
-	 */
-	private function isPhpSupported() {
-		return ['eol' => $this->isPhpOutdated(), 'version' => PHP_VERSION];
-	}
-
-	/**
 	 * Check if the reverse proxy configuration is working as expected
 	 *
 	 * @return bool
@@ -685,7 +662,6 @@ Raw output
 				'isRandomnessSecure' => $this->isRandomnessSecure(),
 				'securityDocs' => $this->urlGenerator->linkToDocs('admin-security'),
 				'isUsedTlsLibOutdated' => $this->isUsedTlsLibOutdated(),
-				'phpSupported' => $this->isPhpSupported(),
 				'forwardedForHeadersWorking' => $this->forwardedForHeadersWorking(),
 				'reverseProxyDocs' => $this->urlGenerator->linkToDocs('admin-reverse-proxy'),
 				'isCorrectMemcachedPHPModuleInstalled' => $this->isCorrectMemcachedPHPModuleInstalled(),
